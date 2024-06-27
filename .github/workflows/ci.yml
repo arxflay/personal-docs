@@ -27,7 +27,7 @@ jobs:
             mkdocs-material-
       - name: install requirements
         run: |
-          pip3 -r requirements.txt
+          pip3 install -r requirements.txt
       - name: make docs
         run: |
           cd site
