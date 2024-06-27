@@ -12,3 +12,16 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+markdown_extensions:
+  - pymdownx.highlight:
+      linenums: true #enables line numeration
+      use_pygments: true
+      anchor_linenums: true #
+      line_spans: __span #wraps all lines in to span for correct highlighting
+      pygments_lang_class: true 
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - attr_list #without this is not possible to set image size
+plugins:
+  - glightbox
