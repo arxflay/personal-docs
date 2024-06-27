@@ -31,4 +31,9 @@ jobs:
       - name: make docs
         run: |
           cd site
-          mkdocs gh-deploy --force
+          mkdocs build
+      - name: deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
