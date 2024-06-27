@@ -28,10 +28,7 @@ jobs:
       - name: install requirements
         run: |
           pip3 install -r requirements.txt
-      - name: clone repo
-        run: |
-          git clone git@github.com:arxflay/arxflay.github.io.git
-          cd arxflay.github.io
       - name: make docs
         run: |
-          mkdocs gh-deploy --config-file ../site/mkdocs.yml --remote-branch master
+          cd site
+          mkdocs gh-deploy --force
