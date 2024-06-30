@@ -24,3 +24,8 @@ This section contains useful links for microcontroller development
 
 1. [RP2040 microcontroller hardware design](https://datasheets.raspberrypi.com/rp2040/hardware-design-with-rp2040.pdf)
 2. [RP2040 datasheet](https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf)
+
+## Books for future reading
+
+1. [Joseph-Yiu - books about Cortex M](https://www.amazon.com/stores/Joseph-Yiu/author/B001IQWINC?qid=1443620939&sr=8-2-fkmr0&ref=ap_rdr&isDramIntegrated=true&shoppingPortalEnabled=true)
+2. The Art of Electronics Third Edition - book about electrical engineering
