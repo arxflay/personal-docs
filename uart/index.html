@@ -1,0 +1,552 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../stm32wb_interrupts/">
+      
+      
+        <link rel="next" href="../links/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
+    
+    
+      
+        <title>STM32WB55 UART - Microcontrollers learning docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CFiraCode+Nerd+Font:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"FiraCode Nerd Font"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#usartuart" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Microcontrollers learning docs" class="md-header__button md-logo" aria-label="Microcontrollers learning docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Microcontrollers learning docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              STM32WB55 UART
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Microcontrollers learning docs" class="md-nav__button md-logo" aria-label="Microcontrollers learning docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Microcontrollers learning docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stm32wb_gpio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    STM32WB55 GPIO
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stm32wb_interrupts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    STM32WB55 Interrupts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    STM32WB55 UART
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    STM32WB55 UART
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#uart-clock-speed" class="md-nav__link">
+    <span class="md-ellipsis">
+      UART clock speed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uart-hal" class="md-nav__link">
+    <span class="md-ellipsis">
+      UART HAL
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../links/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Links
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#uart-clock-speed" class="md-nav__link">
+    <span class="md-ellipsis">
+      UART clock speed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uart-hal" class="md-nav__link">
+    <span class="md-ellipsis">
+      UART HAL
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="usartuart">USART/UART</h1>
+<p><strong>USART/UART</strong> defines <u>set of rules (not specificaly protocol)</u> for serial communication between 
+two and only two parties. Communication can be unidirectional or bidirectional. USART is universal 
+sync/async reciever transmitter where as UART is a universal async reciever transmitter but generaly 
+when we say <em>USART</em> we think about synchronous communication.</p>
+<p>Synchronous communication uses 
+<strong>rx(recieve channel)</strong> or/and <strong>tx(transmission channel)</strong>and <strong>shared clock</strong> between two parties 
+(clock line) to synchronize communication where as async don't use clock. Instead, in UART two parties 
+must set same <strong>baud rate (changes of signal per second)</strong> and each byte must containt start bit and 
+stop bit. <u>Baud rate is not specificaly 1 bit per second</u>, because each baud can contain more 
+than 1 bit depending on protocols. We can't use any baud rate because of internal clock synchronization
+so only commonly used baud rates must be used (9600, 14400, 19200, 38400, 57600, 115200)</p>
+<p>To separate noise from real data in UART is oversampling used. During recieval one baud is split 
+to 8 or 16 samples. From 8/16 samples are important only 3 middle samples. If value of all 3 samples
+not equal to 0 or 1 then it's a noise. If one bit sampling is enabled, then only 1 sample from 8/16
+sample is used and no detection is performed
+<a href="https://fastbitlab.com/usart-oversampling/">fastbitlab has great article about oversampling</a></p>
+<p>Some protocols (RS232) that implement UART use more than two lines (rx, tx). The reason is that they
+establish some sort of handshake. In IEEE 802.11 RTS/CTS, sender (tx) uses <strong>RTS</strong> line to recieve 
+permission to send and <strong>CTS</strong> line is used by reciever to inform sender that it can send. </p>
+<h2 id="uart-clock-speed">UART clock speed</h2>
+<p>As i mentioned previously, UART doesn't use shared clock line but instead uses clock for self to 
+sync to baud rate. Each x ticks of clock is one baud is being read or written.</p>
+<p>To calculate how much ticks it's required until one baud is reached we can use this formula:</p>
+<p>$$
+    CT = (16 / OS) * (CSp / BD)
+$$</p>
+<p>Where:</p>
+<ul>
+<li>CT ... Clock ticks</li>
+<li>OS ... Oversampling (could be 8 or 16)</li>
+<li>CSp ... Clock speed</li>
+<li>BD ... Baud rate</li>
+</ul>
+<p>Clock speed of UART (USART) can be shown in CubeMX</p>
+<p><a class="glightbox" href="../images/cubemx_clocks.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="cubemx clock speed" src="../images/cubemx_clocks.png" /></a></p>
+<h2 id="uart-hal">UART HAL</h2>
+<p>Before working with UART we have to initialize UART peripheral. For initailization is used 
+struct <em>UART_HandleTypeDef</em>. First we have to fill field <em>Instance</em> that determines what UART 
+peripheral we want to use because we can have multiple UART and each UART have it's own memory 
+section. STM32 HAL have predefined macros for UART locations. Next we have to fill field <em>Init</em> 
+where initialization data are stored such as baud rate and UART mode. Lastly we can fill 
+fields that stores pointers to our rx/tx buffers and their sizes.</p>
+<p>In code it will look something like this (CubeMX will generate similar code):</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="w">    </span><span class="n">UART_HandleTypeDef</span><span class="w"> </span><span class="n">huart</span><span class="p">;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">    </span><span class="n">huart</span><span class="p">.</span><span class="n">Instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LPUART1</span><span class="p">;</span><span class="w"> </span><span class="c1">//USART1 is also available</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">    </span><span class="n">huart</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">Mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_MODE_TX_RX</span><span class="p">;</span><span class="w"> </span><span class="c1">//can be also only TX or RX</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">    </span><span class="n">huart</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">BaudRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9600</span><span class="p">;</span><span class="w"> </span><span class="c1">//speed</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="n">huart</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">Parity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_PARITY_NONE</span><span class="p">;</span><span class="w"> </span><span class="c1">//NO parity bit, can be also ODD or EVEN parity bit</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">    </span><span class="n">huart</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">WordLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_WORDLENGTH_8B</span><span class="p">;</span><span class="w"> </span><span class="c1">//each frame has 8 bits (not including start/stop bits), can be 7 or 9</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="n">huart</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">OverSampling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_OVERSAMPLING_16</span><span class="p">;</span><span class="w"> </span><span class="c1">//16 or can be 8 samples</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="n">huart</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">ClockPrescaler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_PRESCALER_DIV1</span><span class="p">;</span><span class="w"> </span><span class="c1">//clock speed is divided by this number (DIV1 = 0)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="n">huart</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">OneBitSampling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_ONEBIT_SAMPLING_DISABLED</span><span class="p">;</span><span class="w"> </span><span class="c1">//if enabled, then noise detection is disabled and middle bit determines final result</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="n">huart</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">StopBits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_STOPBITS_1</span><span class="p">;</span><span class="w"> </span><span class="c1">//length of bit is 1 bit, can be 2 or 1.5</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">    </span><span class="n">huart</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">HwFlowCtl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_HWCONTROL_NONE</span><span class="p">;</span><span class="w"> </span><span class="c1">//no handshake, but could be RTS, CTS or both. Not available on LPUART anyway</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">    </span><span class="n">HAL_UART_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<p>After initialization we have initialize GPIO port for corresponding UART perh. RX/TX/HWControl.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#__codelineno-1-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="w">    </span><span class="n">GPIO_InitTypeDef</span><span class="w"> </span><span class="n">initStruct</span><span class="p">;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="n">initStruct</span><span class="p">.</span><span class="n">Mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_MODE_AF_PP</span><span class="p">;</span><span class="w"> </span><span class="c1">//altenative function mode suitable for UART</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="n">initStruct</span><span class="p">.</span><span class="n">Speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_SPEED_LOW</span><span class="p">;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="n">initStruct</span><span class="p">.</span><span class="n">Pull</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_NOPULL</span><span class="p">;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="n">initStruct</span><span class="p">.</span><span class="n">Pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_PIN_2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">GPIO_PIN_3</span><span class="p">;</span><span class="w"> </span><span class="c1">//(PA2 - TX, PA3 - RX)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="n">initStruct</span><span class="p">.</span><span class="n">Alternate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_AF8_LPUART1</span><span class="p">;</span><span class="w"> </span><span class="c1">//USART1 = GPIO_AF7_USART1</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="n">HAL_GPIO_Init</span><span class="p">(</span><span class="n">GPIOA</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">initStruct</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<p>or via cubemx </p>
+<p><a class="glightbox" href="../images/lpuart_enable.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img align="center," alt="cubemx uart" src="../images/lpuart_enable.png" width="40%" /></a>
+<a class="glightbox" href="../images/lpuart_pin_enable.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img align="center," alt="cubemx pin" src="../images/lpuart_pin_enable.png" width="50%" /></a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>USART1 PB7 (RX) and PB6 (TX) is hardwired to VCP - virtual com port that acts like serial port 
+but is USB/other media. Only PB7 a PB6 can be used in serial monitor because they are mapped in
+VCP driver (/dev/ttyACM0) however it's safe to remap this ports to PA9 (TX) and PA10 (RX). Btw
+by default stm32 sends 7bit per frame ;)</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.tabs.link"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ad660dcc.min.js"></script>
+      
+        <script src="../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

@@ -1,0 +1,738 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../stm32wb_gpio/">
+      
+      
+        <link rel="next" href="../uart/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
+    
+    
+      
+        <title>STM32WB55 Interrupts - Microcontrollers learning docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CFiraCode+Nerd+Font:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"FiraCode Nerd Font"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#stm32wb55-interrupts" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Microcontrollers learning docs" class="md-header__button md-logo" aria-label="Microcontrollers learning docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Microcontrollers learning docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              STM32WB55 Interrupts
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Microcontrollers learning docs" class="md-nav__button md-logo" aria-label="Microcontrollers learning docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Microcontrollers learning docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stm32wb_gpio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    STM32WB55 GPIO
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    STM32WB55 Interrupts
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    STM32WB55 Interrupts
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enabledisable-specific-interrupts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable/Disable specific interrupts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exti" class="md-nav__link">
+    <span class="md-ellipsis">
+      EXTI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nvic-firing-interrupt" class="md-nav__link">
+    <span class="md-ellipsis">
+      NVIC firing interrupt
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nvic-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      NVIC priority
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nvic-priority-masking" class="md-nav__link">
+    <span class="md-ellipsis">
+      NVIC Priority Masking
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    STM32WB55 UART
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../links/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Links
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enabledisable-specific-interrupts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable/Disable specific interrupts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exti" class="md-nav__link">
+    <span class="md-ellipsis">
+      EXTI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nvic-firing-interrupt" class="md-nav__link">
+    <span class="md-ellipsis">
+      NVIC firing interrupt
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nvic-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      NVIC priority
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nvic-priority-masking" class="md-nav__link">
+    <span class="md-ellipsis">
+      NVIC Priority Masking
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="stm32wb55-interrupts">STM32WB55 Interrupts</h1>
+<p>What is interrupt? <strong>Interrupt</strong> is event caused by hardware or CPU core. Interrupts create by CPU 
+core are called <strong>exceptions</strong> or software interrupts. Term "interrupt" is interconnected with 
+<strong>Interrupt Request (IRQ)</strong> which is a signal to request (create) interrupt. Interrupts are managed
+by Nested Vector Interrupt Controller (NVIC) controller which is chip inside Cortex-M Core. 
+Interrupts are handled by <strong>Interrupt handler (ISR)</strong> which are functions defined in high level 
+language. Hardware interrupts can be caused by internal peripherals (timers) or by GPIO 
+(keyboard switch).</p>
+<p>Each interrupt has priority represented as a number in 8bit IPR register that can be set in code. The
+lower is number, the highier is priority. Only left most significant bits of IPR register are used,
+e.g Cortex M4 use 4 left most bits, Cortex M0 only 2. If incomming interrupt has highier priority 
+than currently processing one then interrupt processing  will be stopped, it's state will be stored, 
+interrupt with highier priority will be processed and  after processing of new interrupt previous 
+interrupt will be resumed. That means that they can be stacked multiple interrupts with different
+level of priority and so that's why NVIC is "Nested" </p>
+<p>Each internal interrupt is defined in vector table generated by ST in assembly file and looks like this:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Address</th>
+<th style="text-align: center;">Name</th>
+<th style="text-align: center;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0x0</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">Entry point for all interrupts (points to end of SRAM )</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x4</td>
+<td style="text-align: center;">Reset</td>
+<td style="text-align: center;">Entry point of application</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x8</td>
+<td style="text-align: center;">NMI</td>
+<td style="text-align: center;">Caused by High speed internal clock (HSI) or High speed external clock (HSE)</td>
+</tr>
+<tr>
+<td style="text-align: center;">0xC</td>
+<td style="text-align: center;">HardFault</td>
+<td style="text-align: center;">Interrupt for generic errors</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x10</td>
+<td style="text-align: center;">BusFault</td>
+<td style="text-align: center;">Memory access errors</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x14</td>
+<td style="text-align: center;">UsageFault</td>
+<td style="text-align: center;">Illegal instruction</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x1C - 0x28</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">Reserved</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x2C</td>
+<td style="text-align: center;">SVCall</td>
+<td style="text-align: center;">Caused by Supervisor instruction/privileged instructions call. Privileged instruction is direct access to hardware whereare computation instructions are not privileged. More about this on <a href="https://www.geeksforgeeks.org/privileged-and-non-privileged-instructions-in-operating-system/">GeekForGeeks page</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">0x30</td>
+<td style="text-align: center;">Debug monitor</td>
+<td style="text-align: center;">Used for debugging functionality (ex. breakpoints)</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x34</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">Reserved</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x38</td>
+<td style="text-align: center;">PendSV</td>
+<td style="text-align: center;">Similar to SVCall, but can be delayed</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x3C</td>
+<td style="text-align: center;">SysTick</td>
+<td style="text-align: center;">Used for switching between tasks (called every x ms depending on config)</td>
+</tr>
+</tbody>
+</table>
+<p>full table is on page 367 in 
+<a href="https://www.st.com/resource/en/reference_manual/rm0434-multiprotocol-wireless-32bit-mcu-armbased-cortexm4-with-fpu-bluetooth-lowenergy-and-802154-radio-solution-stmicroelectronics.pdf">rm0434</a></p>
+<p>ISR names in assembly file can be changed because they are just symbols that will be used to look up
+some function with this name exists in code.</p>
+<p><a href="https://www.st.com/resource/en/reference_manual/rm0434-multiprotocol-wireless-32bit-mcu-armbased-cortexm4-with-fpu-bluetooth-lowenergy-and-802154-radio-solution-stmicroelectronics.pdf">rm0434</a></p>
+<h2 id="enabledisable-specific-interrupts">Enable/Disable specific interrupts</h2>
+<p>By default interrupts are disable except Reset, NMI and HardFault. Other Interrupts can be enabled 
+via <code class="language-c highlight"><span class="kt">void</span><span class="w"> </span><span class="n">HAL_NVIC_EnableIRQ</span><span class="p">(</span><span class="n">IRQn_Type</span><span class="w"> </span><span class="n">irqN</span><span class="p">)</span></code> where irqN is enum value of interrupt we want to 
+enable (ex. USART1_IRQn)</p>
+<p>To disable interrupt use function <code class="language-c highlight"><span class="kt">void</span><span class="w"> </span><span class="n">HAL_NVIC_DisableIRQ</span><span class="p">(</span><span class="n">IRQn_Type</span><span class="w"> </span><span class="n">irqN</span><span class="p">)</span></code> where irqN is enum
+value of interrupt we want to enable (ex. USART1_IRQn)</p>
+<h2 id="exti">EXTI</h2>
+<p>Interrupt sources are connected to EXTI controller which de facto works as multiplexer, e.g multiple
+GPIO ports share same ISR. EXTI controller signals are sent to NVIC. EXTI controller is also used
+for wakeup from sleep communicating with Wakeup Interrupt Controller (WIC).</p>
+<p>EXTI have some caveats such as:</p>
+<ul>
+<li>It's not possible to use GPIO port that share same number for interrupts. If PA0 is used for interrupt, 
+then you can't use PB0</li>
+<li>Some ports lanes share same EXTI lane (GPIO 10-15), so you have to use <code class="language-c highlight"><span class="n">__HAL_GPIO_EXTI_GET_IT</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span></code>
+to check if interrupt sent from pin we want via comparing result with macros RESET (0) or SET(0). As
+i understand, this process is called discrimination</li>
+</ul>
+<p>Interrupts associacted with EXTI are named EXTIx_IRQn or EXTIx_y_IRQn, where x is a port number 
+associated with EXTI or x and y determine range.</p>
+<p>Usage of EXTI interrupt is shown below:
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="p">{</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">    </span><span class="c1">//your init code ...</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="c1">//you can also create initialization for button 3 from CubeMX</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">    </span><span class="n">GPIO_InitTypeDef</span><span class="w"> </span><span class="n">initBtn3</span><span class="p">;</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="n">initBtn3</span><span class="p">.</span><span class="n">Mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_MODE_IT_RISING</span><span class="p">;</span><span class="w"> </span><span class="c1">//React when volatge becomes 1</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="n">initBtn3</span><span class="p">.</span><span class="n">Pull</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_PULLUP</span><span class="p">;</span><span class="w"> </span><span class="c1">//By default btn3 is floating when pressed</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="n">initBtn3</span><span class="p">.</span><span class="n">Speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_SPEED_FREQ_LOW</span><span class="p">;</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="n">initBtn3</span><span class="p">.</span><span class="n">Alternate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">    </span><span class="n">initBtn3</span><span class="p">.</span><span class="n">Pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_PIN_1</span><span class="p">;</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">    </span><span class="n">HAL_GPIO_Init</span><span class="p">(</span><span class="n">GPIOD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">initBtn3</span><span class="p">);</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">    </span><span class="c1">//Enable IRQ otherwise no signal will be send</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="w">    </span><span class="n">HAL_NVIC_EnableIRQ</span><span class="p">(</span><span class="n">EXTI1_IRQn</span><span class="p">);</span><span class="w"> </span><span class="c1">//enable EXTI1 because pin number is also 1 (D1)</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="p">}</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="c1">//You must define ISR otherwise default weak function will be used</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="c1">//Name of function corresponds to name in assemble file</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="kt">void</span><span class="w"> </span><span class="nf">EXTI1_IRQHandler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="p">{</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="w">    </span><span class="c1">// you must clear EXTI line otherwise this function will be endlessly called</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="w">    </span><span class="n">__HAL_GPIO_EXTI_CLEAR_IT</span><span class="p">(</span><span class="n">GPIO_PIN_1</span><span class="p">);</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="w">    </span><span class="n">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_PIN_0</span><span class="p">);</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>You can also use more abstract version where you have to define callback for all EXTI handlers.
+Abstract version also performs interrupt discrimination for shared EXTI lines</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">EXTI1_IRQHandler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="p">{</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="n">HAL_GPIO_EXTI_IRQHandler</span><span class="p">(</span><span class="n">GPIO_PIN_1</span><span class="p">);</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="p">}</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="kt">void</span><span class="w"> </span><span class="nf">HAL_GPIO_EXTI_Callback</span><span class="p">(</span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">pin</span><span class="p">)</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="p">{</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pin</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">GPIO_PIN_1</span><span class="p">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">        </span><span class="n">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_PIN_0</span><span class="p">);</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<h2 id="nvic-firing-interrupt">NVIC firing interrupt</h2>
+<p>You can create interrupt by software using function <code class="language-c highlight"><span class="n">HAL_NVIC_SetPendingIRQ</span><span class="p">(</span><span class="n">IRQnType</span><span class="w"> </span><span class="n">irqN</span><span class="p">)</span></code> 
+however some function like <code class="language-c highlight"><span class="kt">void</span><span class="w"> </span><span class="n">HAL_GPIO_EXTI_IRQHandler</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">pin</span><span class="p">)</span></code> will not work because they 
+expect that is EXTI pending bit (that is cleared by <code>__HAL_GPIO_EXTI_CLEAR_IT(EXTI_LANE)</code>). To 
+remove interrupt from pending list use function <code class="language-c highlight"><span class="kt">void</span><span class="w"> </span><span class="n">HAL_NVIC_ClearPendingIRQ</span><span class="p">(</span><span class="n">IRQn_Type</span><span class="w"> </span><span class="n">irqN</span><span class="p">)</span></code></p>
+<p>To check if interrupt is waiting for his turn you can use function <code class="language-c highlight"><span class="kt">uint32_t</span><span class="w"> </span><span class="n">HAL_NVIC_GetPendingIRQ</span><span class="p">(</span><span class="n">IRQn_Type</span><span class="w"> </span><span class="n">irqN</span><span class="p">)</span></code>
+which returns 1 (yes) or 0 (no). Related function <code class="language-c highlight"><span class="kt">uint32_t</span><span class="w"> </span><span class="n">HAL_NVIC_GetActive</span><span class="p">(</span><span class="n">IRQn_Type</span><span class="w"> </span><span class="n">IRQn</span><span class="p">)</span></code>
+is used to check if interrupt is currently being processed.</p>
+<h2 id="nvic-priority">NVIC priority</h2>
+<p>Interrupts in cortex M4 can also have sub priority, that mean that interrupt is with same preemptive
+priority but highier sub priority can be serviced. Preemtive means that it can stop processing current
+interrupt and shift to other. If sub priority highier but preemptive priority is same as processing 
+interrupt then interrupt wit highier sub priority will be processed after current interrupt. However 
+if two interrupts with same preemptive priority and different sub priority are in queue, interrupt 
+with highier sub priority will be processed first after going out of queue. </p>
+<p>For sub priority can be used up to 4 most left bits 
+of IPR depending on how priority division is configured. By default user can have 16 levels of
+preemptive priority but 0 levels of sub priority. To change priority levels we can use function
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">HAL_NVIC_SetPriorityGrouping</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">priorityGroup</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+where as priorityGroup are used macros NVIC_PRIORITYGROUP_x, where x can be from 0 to 4 meaning how
+much bit's are used for preemptive priorty level. NVIC_PRIORITYGROUP_4 equals to 16 leves of 
+preemptive priority and 0 levels of sub priority. You can also set Priority group from CubeMX</p>
+<p><a class="glightbox" href="../images/priorityGroups.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img align="center," alt="CubeMX priorityGroup setting" src="../images/priorityGroups.png" width="50%" /></a></p>
+<p>Priority of interrupt can be set by using function 
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">HAL_NVIC_SetPriority</span><span class="p">(</span><span class="n">IRQn_Type</span><span class="w"> </span><span class="n">irqN</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">preemptivePriority</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">subPriority</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>To get priority you can use function 
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">HAL_NVIC_GetPriority</span><span class="p">(</span><span class="n">IRQn_Type</span><span class="w"> </span><span class="n">irqN</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">priorityGroup</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="o">*</span><span class="n">preemptivePriority</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="o">*</span><span class="n">subPriority</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+where preemptivePriority and subPriority values from IPR register are set accroding to priorityGroup
+parameter which is a bit weird but it works. To get currently used priorityGroup use function 
+<code class="language-c highlight"><span class="kt">uint32_t</span><span class="w"> </span><span class="n">HAL_NVIC_GetPriorityGrouping</span><span class="p">()</span></code></p>
+<h2 id="nvic-priority-masking">NVIC Priority Masking</h2>
+<p>By setting a mask, we can disable interrupts (via PRIMASK reg). and exception (via FAULTMASK reg.)
+or renable them by clearing a mask. There are two helper macros <code class="language-c highlight"><span class="n">__disable_irq</span><span class="p">()</span></code> and 
+<code class="language-c highlight"><span class="n">__enable_irq</span><span class="p">()</span></code>, their usage you can derive from their name. There are also getters(__get_)
+and setters(__set_) macros for PRIMASK and FAULTMASK. Cortex M4 supports masking interrupts for
+specific priority using BASEPRI register or using macro <code class="language-c highlight"><span class="n">__set_BASEPRI</span><span class="p">(</span><span class="n">level</span><span class="p">)</span></code> where level
+represents what interrupt priorities will be blocked from level to 0xFF</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.tabs.link"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ad660dcc.min.js"></script>
+      
+        <script src="../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

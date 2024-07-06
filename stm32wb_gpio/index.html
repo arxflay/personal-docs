@@ -1,0 +1,732 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="../stm32wb_interrupts/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.27">
+    
+    
+      
+        <title>STM32WB55 GPIO - Microcontrollers learning docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CFiraCode+Nerd+Font:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"FiraCode Nerd Font"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#shortly-about-stm32wb55-gpio-ports" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Microcontrollers learning docs" class="md-header__button md-logo" aria-label="Microcontrollers learning docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Microcontrollers learning docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              STM32WB55 GPIO
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Microcontrollers learning docs" class="md-nav__button md-logo" aria-label="Microcontrollers learning docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Microcontrollers learning docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    STM32WB55 GPIO
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    STM32WB55 GPIO
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gpio-port-address-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPIO port Address mapping
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpio-bit-banding" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPIO bit-banding
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpio-accessing-ports-and-registers" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPIO accessing ports and registers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpio-port-purpose-setting" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPIO port purpose setting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hal-gpio-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      HAL GPIO functions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stm32wb_interrupts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    STM32WB55 Interrupts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    STM32WB55 UART
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../links/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Links
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gpio-port-address-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPIO port Address mapping
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpio-bit-banding" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPIO bit-banding
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpio-accessing-ports-and-registers" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPIO accessing ports and registers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpio-port-purpose-setting" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPIO port purpose setting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hal-gpio-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      HAL GPIO functions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="shortly-about-stm32wb55-gpio-ports">Shortly about STM32WB55 GPIO ports</h1>
+<p>This section contains all important informations about GPIO that i learned so far</p>
+<h2 id="gpio-port-address-mapping">GPIO port Address mapping</h2>
+<ul>
+<li>GPIO A - <em>0x48000000</em></li>
+<li>GPIO B - <em>0x48000400</em></li>
+<li>GPIO C - <em>0x48000800</em></li>
+<li>GPIO D - <em>0x48000C00</em></li>
+<li>GPIO H - <em>0x48001C00</em></li>
+</ul>
+<h2 id="gpio-bit-banding">GPIO bit-banding</h2>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Unforutunately, bit-banding <strong>is supported only for AHB1 and APBx</strong> as stated in 
+<a href="https://community.st.com/t5/stm32-mcus-products/bit-banding-ahb2-in-stm32l4-is-it-possible/td-p/483299">source</a>.
+GPIO ports are part of AHB2 memory region (0x48000000) which doesn't fit
+in bit-banding memory alias for peripherals on address space is on 0x42000000. 
+I think this change is made because using bit-banding on GPIO usually doesn't give speed benefits 
+as stated in many books. Bit-banding is replaced with BSRR and BRR registers.</p>
+</div>
+<h2 id="gpio-accessing-ports-and-registers">GPIO accessing ports and registers</h2>
+<p>Each GPIO section has 11 registers, each register has size of 4 bytes and each bit of register 
+corresponds to specific port (expect some registers, where 2 or 4 bits are used for single port)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">offset</th>
+<th style="text-align: center;">register name</th>
+<th style="text-align: center;">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0x0</td>
+<td style="text-align: center;">MODER</td>
+<td style="text-align: center;">Specifies mode of GPIO port. 2bit per port</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x4</td>
+<td style="text-align: center;">OTYPER</td>
+<td style="text-align: center;">Specifies type of output (push-pull or open-drain)</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x8</td>
+<td style="text-align: center;">OSPEEDR</td>
+<td style="text-align: center;">Specifies output speed time that affects switch from low state to high state</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x0B</td>
+<td style="text-align: center;">PUPDR</td>
+<td style="text-align: center;">Specifies if pull-up or pull-down resistors should be used. 2bit per port</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x10</td>
+<td style="text-align: center;">IDR</td>
+<td style="text-align: center;">Used for reading value from port (only for input ports)</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x14</td>
+<td style="text-align: center;">ODR</td>
+<td style="text-align: center;">Used for setting output value - low(0), high(1) (only for output ports)</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x18</td>
+<td style="text-align: center;">BSRR</td>
+<td style="text-align: center;">Used for atomic reset and set port (only for write). Very fast. First 16 bits are used for SET, last 16 bits are used for RESET, zero's are ignored</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x1B</td>
+<td style="text-align: center;">LCKK</td>
+<td style="text-align: center;">Used for mode locking. After locking port can't be reset until restart</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x20</td>
+<td style="text-align: center;">AFRL</td>
+<td style="text-align: center;">Used for setting port "special" function, like UART (if MODER is equal to 0x10) 4bits per port are used</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x24</td>
+<td style="text-align: center;">AFRH</td>
+<td style="text-align: center;">Same as AFRL but for next 8 ports (because all ports could not fit in AFRL)</td>
+</tr>
+<tr>
+<td style="text-align: center;">0x28</td>
+<td style="text-align: center;">BRR</td>
+<td style="text-align: center;">Similar to BSRR but used only for port reset</td>
+</tr>
+</tbody>
+</table>
+<p>In code these registers can be accessed by adding offset to base GPIO_TYPE address or via GPIO_TypeDef pointer. Example for GPIO B and ODR register
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1">//via address and offset</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="kt">uint32_t</span><span class="w"> </span><span class="o">*</span><span class="n">ODR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)(</span><span class="mh">0x48000400</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">0x14</span><span class="p">);</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="o">*</span><span class="n">ODR</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="mh">0x01</span><span class="w"> </span><span class="c1">//set HIGH to first port</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="c1">//via GPIO_TypeDef pointer</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="n">GPIO_TypeDef</span><span class="w"> </span><span class="o">*</span><span class="n">gpioA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">GPIO_TypeDef</span><span class="o">*</span><span class="p">)(</span><span class="mh">0x48000400</span><span class="p">);</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="n">gpioA</span><span class="o">-&gt;</span><span class="n">ODR</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="mh">0x02</span><span class="w"> </span><span class="c1">//set HIGH to second port</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>More about registers on page 300 in
+<a href="https://www.st.com/resource/en/reference_manual/rm0434-multiprotocol-wireless-32bit-mcu-armbased-cortexm4-with-fpu-bluetooth-lowenergy-and-802154-radio-solution-stmicroelectronics.pdf">rm0434</a></p>
+<h2 id="gpio-port-purpose-setting">GPIO port purpose setting</h2>
+<p>GPIO port purpose can be set via CubeMX editor as shown below</p>
+<p><a class="glightbox" href="../images/cubemx_pinout.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img align="center," alt="CubeMX GPIO_C 0 purpose setting" src="../images/cubemx_pinout.png" width="50%" /></a> 
+<a class="glightbox" href="../images/cubemx_pinout_details.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img align="center," alt="CubeMX GPIO_C 0 purpose setting" src="../images/cubemx_pinout_details.png" width="40%" /></a></p>
+<p>or in code with <code>GPIO_TypeDef*</code> and <code class="language-c highlight"><span class="kt">void</span><span class="w"> </span><span class="n">HAL_GPIO_Init</span><span class="p">(</span><span class="n">GPIO_TypeDef</span><span class="w"> </span><span class="o">*</span><span class="n">portSection</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_InitTypeDef</span><span class="w"> </span><span class="o">*</span><span class="n">initStruct</span><span class="p">)</span></code> (you can also set purpose via registers)</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#__codelineno-1-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">GPIO_InitTypeDef</span><span class="w"> </span><span class="n">initStruct</span><span class="p">;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="n">initStruct</span><span class="p">.</span><span class="n">Pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="n">initStruct</span><span class="p">.</span><span class="n">Mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_MODE_OUTPUT_PP</span><span class="p">;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">initStruct</span><span class="p">.</span><span class="n">Pull</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_NOPULL</span><span class="p">;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="n">initStruct</span><span class="p">.</span><span class="n">Speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_SPEED_FREQ_LOW</span><span class="p">;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="n">initStruct</span><span class="p">.</span><span class="n">Alternate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="n">HAL_GPIO_Init</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">initStruct</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>HAL_GPIO_Init function is called for each pin that set in CubeMX in MX_GPIO_Init function</p>
+</div>
+<p>GPIO_InitTypeDef structure contains:</p>
+<ul>
+<li>Pin - Number from 1 to max for specific GPIO region (ex. 1 to 15 for GPIO A, B, C)</li>
+<li>Mode - Determines GPIO purpose</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Mode Type</th>
+<th style="text-align: center;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">GPIO_MODE_INPUT</td>
+<td style="text-align: center;">In this mode port only can read values</td>
+</tr>
+<tr>
+<td style="text-align: center;">GPIO_MODE_ANALOG</td>
+<td style="text-align: center;">Either output or input, controlled by ADC_ functions and structs</td>
+</tr>
+<tr>
+<td style="text-align: center;">GPIO_MODE_OUTPUT_PP</td>
+<td style="text-align: center;">In this mode port can only output low or high. Output values are controlled by two transistors N-MOS</td>
+</tr>
+<tr>
+<td style="text-align: center;">GPIO_MODE_OUTPUT_OD</td>
+<td style="text-align: center;">In this mode port can only output low (N-MOS) or float. Floating means that port is not connected to anything, it's neither 1 or 0. To make floating state useful you must fill field <em>Pull</em> with GPIO_PULL_UP or GPIO_PULL_DOWN or provide output with external pull-up/pull-down resistors. <a href="https://youtu.be/IjKDKGqCm_4">Explanation from TechVedas. learn</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">GPIO_MODE_AF_PP</td>
+<td style="text-align: center;">In this mode port purpose is determined by <em>Alternate</em> field. Controlled by two transistors. Used by unidirectional protocols (UART)</td>
+</tr>
+<tr>
+<td style="text-align: center;">GPIO_MODE_AF_OD</td>
+<td style="text-align: center;">In this mode port purpose is determined by <em>Alternate</em> field. Has low and floating state. Used by multidirectional protocols (i2c)</td>
+</tr>
+<tr>
+<td style="text-align: center;">GPIO_MODE_IT_RISING</td>
+<td style="text-align: center;">Performs IRQ when value of input port changes to 1</td>
+</tr>
+<tr>
+<td style="text-align: center;">GPIO_MODE_IT_FALLING</td>
+<td style="text-align: center;">Performs IRQ when value of input port changes to 0</td>
+</tr>
+<tr>
+<td style="text-align: center;">GPIO_MODE_IT_RISING_FALLING</td>
+<td style="text-align: center;">Performs IRQ when value of input port changes</td>
+</tr>
+<tr>
+<td style="text-align: center;">GPIO_MODE_EVT_*</td>
+<td style="text-align: center;">Related to sleep mode</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Pull - Determines if internal pull resistor is used. Can have GPIO_PULLUP (VCC), GPIO_PULLDOWN (Ground) or GPIO_NOPULL</li>
+<li>Speed - Determines speed of change from low to high for port configured with OUTPUT mode </li>
+<li>Alternate - Determines "special" function for port (like USART or i2c). Possible values depends on port. Values starts with word <em>GPIO_AF</em></li>
+</ul>
+<p>Purpose of port can be locked (become unchangable until reset) via <code>!#c void HAL_GPIO_LockPin(GPIO_TypeDef *portSection, uint16_t pinNum)</code></p>
+<h2 id="hal-gpio-functions">HAL GPIO functions</h2>
+<p>For reading value from port is used function <code class="language-c highlight"><span class="kt">void</span><span class="w"> </span><span class="n">GPIO_PinState</span><span class="w"> </span><span class="n">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIO_TypeDef</span><span class="w"> </span><span class="o">*</span><span class="n">portSection</span><span class="p">,</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">pinNum</span><span class="p">)</span></code> 
+which returns GPIO_PIN_RESET (0) or GPIO_PIN_SET (1)</p>
+<p>For writing value to port is used function <code class="language-c highlight"><span class="kt">void</span><span class="w"> </span><span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIO_TypeDef</span><span class="w"> </span><span class="o">*</span><span class="n">portSection</span><span class="p">,</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">pinNum</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_PinState</span><span class="w"> </span><span class="n">value</span><span class="p">)</span></code></p>
+<p>For switching value in port (off when on and on when off) is used function <code class="language-c highlight"><span class="kt">void</span><span class="w"> </span><span class="n">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIO_TypeDef</span><span class="w"> </span><span class="o">*</span><span class="n">portSection</span><span class="p">,</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">pinNum</span><span class="p">)</span></code></p>
+<p>example:
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span>
+<span class="normal"><a href="#__codelineno-2-6">6</a></span>
+<span class="normal"><a href="#__codelineno-2-7">7</a></span>
+<span class="normal"><a href="#__codelineno-2-8">8</a></span>
+<span class="normal"><a href="#__codelineno-2-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">HAL_Delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"> </span><span class="c1">//sleep for 100ms</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="c1">//Checks if button 3 is pressed</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1">//(by default pin is floating so you should set pull-up resistor)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOD</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_PIN_1</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">GPIO_PIN_RESET</span><span class="p">)</span><span class="w"> </span><span class="c1">//GPIO_PIN_RESET because when button is unpressed, value of port is GPIO_PIN_SET</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_PIN_0</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_PIN_SET</span><span class="p">)</span><span class="w"> </span><span class="c1">//turn on green led</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="k">else</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_PIN_0</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_PIN_RESET</span><span class="p">)</span><span class="w"> </span><span class="c1">//disable green led</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="n">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_PIN_5</span><span class="p">);</span><span class="w"> </span><span class="c1">//switch state of blue led</span>
+</span></code></pre></div></td></tr></table></div></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To ensure that GPIO ports will function you must enable clock to corresponding GPIO section via<br />
+<code>__HAL_RCC_GPIOx_CLK_ENABLE()</code> where x is replaced by GPIO section (ex. A, B). However CubeMX
+enables clocks for all GPIO sections used in .ioc in function MX_GPIO_Init. You can disable clocks
+via <code>__HAL_RCC_GPIOx_CLK_DISABLE()</code>, then GPIO ports will not respond to commands.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.tabs.link"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ad660dcc.min.js"></script>
+      
+        <script src="../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
