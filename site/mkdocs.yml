@@ -1,8 +1,6 @@
 site_name: Microcontrollers learning docs
 theme:
   name: material
-  extra_css:
-    - stylesheets/extra.css
   font:
     code: FiraCode Nerd Font
   features:
@@ -35,7 +33,17 @@ markdown_extensions:
 plugins:
   - glightbox #image gallery with zoom https://squidfunk.github.io/mkdocs-material/reference/images/
 
+extra_javascript:
+  - javascripts/katex.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+
+extra_css:
+  - stylesheets/extra.css
+  - https://unpkg.com/katex@0/dist/katex.min.css
+
 nav:
   - STM32WB55 GPIO: 'stm32wb_gpio.md'
   - STM32WB55 Interrupts: 'stm32wb_interrupts.md'
+  - STM32WB55 UART: "uart.md"
   - Links: 'links.md'

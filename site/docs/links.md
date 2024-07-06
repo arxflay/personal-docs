@@ -19,6 +19,7 @@ This section contains useful links for microcontroller development
 1. [DevStyle themes + CodeTogether](https://marketplace.eclipse.org/content/darkest-dark-theme-devstyle)
 2. [Planet theme](https://marketplace.eclipse.org/content/planet-themes)
 3. [ARM Cortex-M dev tools](https://marketplace.eclipse.org/content/eclipse-embedded-cc)
+4. [TM Terminal](https://marketplace.eclipse.org/content/tm-terminal)
 
 ## Raspberry PI links
 
